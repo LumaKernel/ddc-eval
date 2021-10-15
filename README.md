@@ -21,7 +21,7 @@ function! s:pick(word)
   endif
 endfunction
 
-call ddc#custom#alias('source', 'pick', 'list')
+call ddc#custom#alias('source', 'pick', 'eval')
 call ddc#custom#patch_global('sources', ['pick'])
 call ddc#custom#patch_global('sourceOptions', {
     \ 'pick': {
