@@ -1,8 +1,8 @@
-import type { Candidate } from "https://deno.land/x/ddc_vim@v0.13.0/types.ts";
-import { BaseSource } from "https://deno.land/x/ddc_vim@v0.13.0/types.ts";
+import type { Candidate } from "https://deno.land/x/ddc_vim@v0.17.0/types.ts";
+import { BaseSource } from "https://deno.land/x/ddc_vim@v0.17.0/types.ts";
 import type {
   GatherCandidatesArguments,
-} from "https://deno.land/x/ddc_vim@v0.13.0/base/source.ts";
+} from "https://deno.land/x/ddc_vim@v0.17.0/base/source.ts";
 
 type Params = {
   expr: string;
