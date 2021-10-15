@@ -1,0 +1,73 @@
+*ddc-eval.txt*				Vim Script Eval Completion for ddc.vim
+
+Author : Luma <world@luma.email>
+License: MIT <https://github.com/LumaKernel/ddc-eval/blob/main/LICENSE>
+
+
+==============================================================================
+CONTENTS						   *ddc-eval-contents*
+
+INTRODUCTION					       |ddc-eval-introduction|
+INSTALL							    |ddc-eval-install|
+EXAMPLES						   |ddc-eval-examples|
+PARAMS							     |ddc-eval-params|
+
+==============================================================================
+INTRODUCTION					       *ddc-eval-introduction*
+
+This source collects candidates from the evaluation result of vim script expr.
+
+==============================================================================
+INSTALL							    *ddc-eval-install*
+
+Please install both "ddc.vim" and "denops.vim".
+
+https://github.com/Shougo/ddc.vim
+https://github.com/vim-denops/denops.vim
+
+==============================================================================
+EXAMPLES						   *ddc-eval-examples*
+
+Recipe: Completion with picking words.
+
+>
+	let g:ddc_pick_items = []
+
+	function! s:pick(word)
+	  call add(g:ddc_pick_items, { 'word': a:word })
+	  if len(g:ddc_pick_items) > 100
+	    let g:ddc_pick_items = g:ddc_pick_items[:-2]
+	  endif
+	endfunction
+
+	call ddc#custom#alias('source', 'pick', 'list')
+	call ddc#custom#patch_global('sources', ['pick'])
+	call ddc#custom#patch_global('sourceOptions', {
+	    \ 'pick': {
+	    \   'mark': 'P',
+	    \   'isVolatile': v:true,
+	    \ }})
+	call ddc#custom#patch_global('sourceParams', {
+	    \ 'pick': {
+	    \   'expr': 'g:ddc_pick_items',
+	    \ }})
+	nnoremap <silent> * :<c-u>call <sid>pick(expand('<cword>'))<cr>*
+<
+
+==============================================================================
+PARAMS							     *ddc-eval-params*
+
+							 *ddc-eval-param-expr*
+expr		(string)
+		String evaluated as vim script expression.
+
+		Default: "[]"
+
+						   *ddc-eval-param-ignoreFail*
+ignoreFail	(boolean)
+		Whether to ignore failed evaluation.
+
+		Default: false
+
+==============================================================================
+vim:tw=78:ts=8:noet:ft=help:norl
